@@ -1,0 +1,23 @@
+{
+    "name": "ninjasimo91/essential-mvc",
+    "description": "Framework Mvc basic for small project",
+    "type": "framework",
+    "keywords": [
+        "framework",
+        "mvc"
+    ],
+    "authors": [
+        {
+            "name": "Simone Anselmo",
+            "email": "simone.anselmo@simowd.it"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EssentialMVC\\": "src"
+        }
+    }
+}
