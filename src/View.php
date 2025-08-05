@@ -1,8 +1,8 @@
 <?php
 
-namespace SWD\Core;
+namespace EssentialMVC;
 
-use SWD\Core\App;
+use EssentialMVC\App;
 
 class View
 {

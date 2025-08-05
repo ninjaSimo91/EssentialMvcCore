@@ -1,9 +1,9 @@
 <?php
 
-namespace SWD\Core;
+namespace EssentialMVC;
 
-use SWD\Core\App;
-use SWD\Core\Exception\NotFoundException;
+use EssentialMVC\App;
+use EssentialMVC\Exception\NotFoundException;
 
 class Router
 {

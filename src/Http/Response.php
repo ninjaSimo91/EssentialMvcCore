@@ -1,9 +1,9 @@
 <?php
 
-namespace SWD\Core\Http;
+namespace EssentialMVC\Http;
 
-use SWD\Core\App;
-use SWD\Core\View;
+use EssentialMVC\App;
+use EssentialMVC\View;
 
 class Response
 {

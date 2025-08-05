@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\Core\Http;
+namespace EssentialMVC\Http;
 
 class Request
 {

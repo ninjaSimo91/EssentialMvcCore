@@ -1,14 +1,14 @@
 <?php
 
-namespace SWD\Core;
+namespace EssentialMVC;
 
-use SWD\Core\View;
-use SWD\Core\Database;
-use SWD\Core\Middleware;
-use SWD\Core\Router;
-use SWD\Core\Http\Request;
-use SWD\Core\Http\Response;
-use SWD\Core\Exception\NotFoundException;
+use EssentialMVC\View;
+use EssentialMVC\Database;
+use EssentialMVC\Middleware;
+use EssentialMVC\Router;
+use EssentialMVC\Http\Request;
+use EssentialMVC\Http\Response;
+use EssentialMVC\Exception\NotFoundException;
 
 class App
 {

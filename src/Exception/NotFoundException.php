@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\Core\Exception;
+namespace EssentialMVC\Exception;
 
 class NotFoundException extends \Exception
 {

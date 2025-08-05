@@ -1,6 +1,6 @@
 <?php
 
-namespace SWD\Core;
+namespace EssentialMVC;
 
 class Database
 {

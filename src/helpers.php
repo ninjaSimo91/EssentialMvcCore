@@ -1,7 +1,7 @@
 <?php
 
-use SWD\Core\App;
-use SWD\Core\Env;
+use EssentialMVC\App;
+use EssentialMVC\Env;
 
 function env(string $key, ?string $default = null): ?string
 {
