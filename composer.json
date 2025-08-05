@@ -19,6 +19,9 @@
     "autoload": {
         "psr-4": {
             "EssentialMVC\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }
