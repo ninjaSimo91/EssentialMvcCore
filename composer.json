@@ -2,6 +2,7 @@
     "name": "ninjasimo91/essential-mvc",
     "description": "Framework Mvc basic for small project",
     "type": "framework",
+    "license": "MIT",
     "keywords": [
         "framework",
         "mvc"
