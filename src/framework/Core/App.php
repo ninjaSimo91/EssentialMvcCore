@@ -27,18 +27,20 @@ class App
 
     public function __construct(string $basePath)
     {
-        $this->basePath = $basePath;
+        $this->basePath = rtrim($basePath, '/');
+        $this->loadConfig();
 
-        $this->request = new Request();
-        $this->middleware = new Middleware($this);
+        $this->request = new Request($this);
         $this->router = new Router($this);
+        $this->middleware = new Middleware($this);
         $this->response = new Response($this);
-        $this->view = new View($this);
 
-        $this->addConfig();
-        
+        $this->loadRoutes();
+
+        // $this->view = new View($this);
+
         // $this->getPdoConnection();
-        static::$instance = $this;
+        // static::$instance = $this;
     }
 
     public static function getInstance(): App
@@ -46,10 +48,8 @@ class App
         return self::$instance;
     }
 
-    private function addConfig(): void
+    private function loadConfig(): void
     {
-        $this->addRoutes();
-
         $dir = $this->basePath . '/config';
         if (is_dir($dir)) {
             $files = scandir($dir);
@@ -62,15 +62,21 @@ class App
             $filename = pathinfo($dir, PATHINFO_FILENAME);
             $this->config[$filename] = include $dir;
         }
-        $this->config['middleware'] = $this->middleware->queueRoute;
     }
 
-    private function addRoutes(): void
+    private function loadRoutes(): void
     {
-        $this->config['routes'] = $this->router->group(function (Router $router) {
-            include $this->basePath . '/routes/web.php';
-            return $router->routes;
+        $this->router->group([], function (Router $router) {
+            foreach ($this->config['routes'] as $route) {
+                $routeFile = $this->basePath . $route;
+                if (file_exists($routeFile)) include $routeFile;
+            }
         });
+    }
+
+    private function addMiddlewares(): void
+    {
+        $this->config['middlewares'] = $this->middleware->queueRoute;
     }
 
     private function getPdoConnection()

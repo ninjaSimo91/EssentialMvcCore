@@ -24,20 +24,15 @@ class Middleware
         }
     }
 
-    public function execute(): void
+    public function execute(array $middlewares): void
     {
-        $req = $this->app->request->getRequestPath();
-        foreach ($this->app->config['middleware'] as $basePath => $middlewareGroup) {
-            if (str_starts_with($req, $basePath)) {
-                $this->executeMiddleware($middlewareGroup);
-            }
+        foreach ($middlewares as $middleware) {
+            $this->executeMiddleware($this->app->config['middlewares'][$middleware]);
         }
     }
 
-    private function executeMiddleware(array $middlewares): void
+    private function executeMiddleware(string $middleware): void
     {
-        foreach ($middlewares as $middleware) {
-            (new $middleware)->exec($this->app);
-        }
+        (new $middleware)->exec($this->app);
     }
 }

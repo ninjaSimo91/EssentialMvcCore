@@ -12,7 +12,7 @@ class Controller
     public function __construct(App $app)
     {
         $this->app = $app;
-        if(isset($this->app->pdo)) $this->db = $app->pdo;
+        if (isset($this->app->pdo)) $this->db = $app->pdo;
     }
 
     public function view(string $page, array $values = [])

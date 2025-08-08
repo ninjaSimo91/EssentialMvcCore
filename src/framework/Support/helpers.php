@@ -1,7 +1,7 @@
 <?php
 
 use EssentialMVC\App;
-use EssentialMVC\Env;
+use EssentialMVC\Support\Env;
 
 function env(string $key, ?string $default = null): ?string
 {
