@@ -1,5 +1,5 @@
 {
-    "name": "ninjasimo91/essential-mvc",
+    "name": "ninjasimo91/essential-mvc-core",
     "description": "Framework Mvc basic for small project",
     "type": "framework",
     "license": "MIT",
@@ -21,7 +21,7 @@
             "EssentialMVC\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/Support/helpers.php"
         ]
     }
 }
