@@ -1,12 +1,12 @@
 <?php
 
-namespace EssentialMVC;
+namespace EssentialMVC\Core;
 
-use EssentialMVC\App;
+use EssentialMVC\Core\App;
 
 class View
 {
-    public App $app;
+    public CoreApp $app;
 
     public function __construct(App $app)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC;
+namespace EssentialMVC\Core;
 
 class Model
 {

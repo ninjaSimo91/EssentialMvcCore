@@ -1,9 +1,9 @@
 <?php
 
-namespace EssentialMVC;
+namespace EssentialMVC\Core;
 
 use Closure;
-use EssentialMVC\App;
+use EssentialMVC\Core\App;
 use EssentialMVC\Exception\NotFoundException;
 
 class Router

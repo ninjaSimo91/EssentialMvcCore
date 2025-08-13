@@ -1,11 +1,11 @@
 <?php
 
-namespace EssentialMVC;
+namespace EssentialMVC\Core;
 
-use EssentialMVC\View;
-use EssentialMVC\Database;
-use EssentialMVC\Middleware;
-use EssentialMVC\Router;
+use EssentialMVC\Core\View;
+use EssentialMVC\Core\Database;
+use EssentialMVC\Core\Middleware;
+use EssentialMVC\Core\Router;
 use EssentialMVC\Http\Request;
 use EssentialMVC\Http\Response;
 use EssentialMVC\Exception\NotFoundException;

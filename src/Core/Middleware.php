@@ -1,8 +1,8 @@
 <?php
 
-namespace EssentialMVC;
+namespace EssentialMVC\Core;
 
-use EssentialMVC\App;
+use EssentialMVC\Core\App;
 
 class Middleware
 {

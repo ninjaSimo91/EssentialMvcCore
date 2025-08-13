@@ -2,7 +2,7 @@
 
 namespace EssentialMVC\Contracts;
 
-use EssentialMVC\App;
+use EssentialMVC\Core\App;
 
 interface MiddlewareInterface
 {

@@ -2,8 +2,8 @@
 
 namespace EssentialMVC\Http;
 
-use EssentialMVC\App;
-use EssentialMVC\View;
+use EssentialMVC\Core\App;
+use EssentialMVC\Core\View;
 
 class Response
 {

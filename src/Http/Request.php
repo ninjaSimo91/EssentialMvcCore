@@ -2,7 +2,7 @@
 
 namespace EssentialMVC\Http;
 
-use EssentialMVC\App;
+use EssentialMVC\Core\App;
 
 class Request
 {
