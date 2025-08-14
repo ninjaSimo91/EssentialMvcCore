@@ -36,6 +36,7 @@ class App
         $this->response = new Response($this);
 
         $this->loadRoutes();
+        dd($this->router->routes);
 
         // $this->view = new View($this);
 

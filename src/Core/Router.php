@@ -105,7 +105,6 @@ class Router
 
     public function keyget(string $route, string $key, array $middleware = [], ?Controller $controller = null): void
     {
-        $finalRoute = str_replace('$', $key, $route);
         $controller = (null === $controller) ? [$this->parentController, $key] : [$controller, $key];
         $this->get(rtrim(str_replace('$', $key, $route), '/'), $controller, $key, $middleware);
     }
@@ -123,7 +122,7 @@ class Router
 
         $this->routes[$method][$route]['controller'] = $controller[0];
         $this->routes[$method][$route]['method'] = $controller[1];
-        $this->routes[$method][$route]['alias'] = (!empty($alias)) ? implode('.', $this->groupAliases) : implode('.', $this->groupAliases) . ".{$alias}";
+        $this->routes[$method][$route]['alias'] = (empty($alias)) ? implode('.', $this->groupAliases) : ltrim(implode('.', $this->groupAliases) . ".{$alias}", ".");
         $this->routes[$method][$route]['middleware'] = array_unique(array_merge($this->groupMiddlewares, $middleware));
     }
 
