@@ -103,18 +103,17 @@ class Router
         $this->addRoute('post', $route, $controller, $middleware, $alias);
     }
 
-    public function put(string $route, array|string $controller, string $alias = "", array $middleware = []): void
+    public function keyget(string $route, string $key, array $middleware = [], ?Controller $controller = null): void
     {
-        if (is_string($controller)) $controller = [$this->parentController, $controller];
-
-        $this->addRoute('put', $route, $controller, $middleware, $alias);
+        $finalRoute = str_replace('$', $key, $route);
+        $controller = (null === $controller) ? [$this->parentController, $key] : [$controller, $key];
+        $this->get(rtrim(str_replace('$', $key, $route), '/'), $controller, $key, $middleware);
     }
 
-    public function delete(string $route, array|string $controller, string $alias = "", array $middleware = []): void
+    public function keypost(string $route, string $key, array $middleware = [], ?Controller $controller = null): void
     {
-        if (is_string($controller)) $controller = [$this->parentController, $controller];
-
-        $this->addRoute('delete', $route, $controller, $middleware, $alias);
+        $controller = (null === $controller) ? [$this->parentController, $key] : [$controller, $key];
+        $this->post(rtrim(str_replace('$', $key, $route), '/'), $controller, $key, $middleware);
     }
 
     private function addRoute(string $method, string $route, array $controller, array $middleware = [], string $alias = ""): void
@@ -139,8 +138,8 @@ class Router
     {
         $method = $this->app->request->getRequestMethod();
         $path = $this->app->request->getRequestPath();
-        if ($method == 'post' || $method == 'put' || $method == 'delete') $post = $this->app->request->getRequestAttributes();
 
+        if ($method == 'post' || $method == 'put' || $method == 'delete') $post = $this->app->request->getRequestAttributes();
         return $this->routes[$method][$path] ?? $this->parseRoute($this->routes[$method], $path);
     }
 
