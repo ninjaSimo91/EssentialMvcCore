@@ -2,7 +2,7 @@
 
 namespace EssentialMVC\Support\Env\Contracts;
 
-use EssentialMVC\Exception\EnvException;
+use EssentialMVC\Support\Env\Exception\EnvException;
 
 interface EnvLoader
 {
