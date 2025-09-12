@@ -2,31 +2,75 @@
 
 namespace EssentialMVC\Support;
 
+use Exception;
+
 class Env
 {
-    public static function addVarsByFile(string $envFileDir): void
+
+    public function __construct(string $envFileDir)
+    {
+        $this->loadEnvFile($envFileDir);
+    }
+
+    private function loadEnvFile(string $envFileDir): void
     {
         try {
-            $envVars = file($envFileDir);
-            foreach ($envVars as $envVar) {
-                if (!empty(trim($envVar))) putenv(trim($envVar));
-            }
-        } catch (InvalidFileException $e) {
-            $this->writeErrorAndDie([
-                'The environment file is invalid!',
-                $e->getMessage(),
-            ]);
+            $this->putEnvVars($envFileDir);
+        } catch (Exception $e) {
+            $this->logError($e->getMessage());
         }
     }
 
-    public static function add(string $key, string $value = null): void
+    private function putEnvVars(string $envFileDir): void
     {
-        putenv("{trim($key)}={trim($value)}");
+        $this->fileExist($envFileDir);
+        $this->fileIsReadable($envFileDir);
+
+        /** @var string[]|false*/
+        $envVars = $this->getEnvVarsByFileDir($envFileDir);
+        foreach ($envVars as $envVar) {
+            putenv($envVar);
+        }
     }
 
-    public static function get(string $key, string $default = null): ?string
+    private function fileExist(string $envFileDir): void
     {
-        if (getenv($key)) return getenv($key);
-        return $default;
+        if (!file_exists($envFileDir)) {
+            throw new \Exception("File not found: $envFileDir");
+        }
+    }
+
+    private function fileIsReadable(string $envFileDir): void
+    {
+        if (!is_readable($envFileDir)) {
+            throw new \Exception("File not readable: $envFileDir");
+        }
+    }
+
+    /** @return string[] */
+    private function getEnvVarsByFileDir(string $envFileDir): array
+    {
+        /** @var string[]|false*/
+        $envVars = file($envFileDir, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        if ($envVars === false) {
+            throw new \Exception("Unable to read env file: $envFileDir");
+        } else {
+            return $envVars;
+        }
+    }
+
+    private function logError(string $e): void
+    {
+        echo $e;
+    }
+
+    public function get(string $key, string $default = ''): string
+    {
+        $value = getenv($key);
+
+        return ($value !== false)
+            ? $value
+            : $default;
     }
 }

@@ -3,7 +3,7 @@
 use EssentialMVC\Core\App;
 use EssentialMVC\Support\Env;
 
-function env(string $key, ?string $default = null): ?string
+function env(string $key, string $default = ''): string
 {
   return Env::get($key, $default);
 }
