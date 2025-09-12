@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Env\Contracts;
+namespace EssentialMVC\Support\Env\Contracts;
 
 use EssentialMVC\Exception\EnvException;
 

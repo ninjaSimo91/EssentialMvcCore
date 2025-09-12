@@ -2,8 +2,8 @@
 
 namespace EssentialMVC\Support\Env;
 
-use EssentialMVC\Env\Contracts\EnvLoader;
-use EssentialMVC\Env\Exception\EnvException;
+use EssentialMVC\Support\Env\Contracts\EnvLoader;
+use EssentialMVC\Support\Env\Exception\EnvException;
 
 class Env
 {

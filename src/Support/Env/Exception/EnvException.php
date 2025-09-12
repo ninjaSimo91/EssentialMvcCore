@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Env\Exception;
+namespace EssentialMVC\Support\Env\Exception;
 
 class EnvException extends \Exception
 {
