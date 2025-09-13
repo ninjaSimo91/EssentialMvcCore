@@ -9,40 +9,111 @@ use EssentialMVC\Core\Router;
 use EssentialMVC\Http\Request;
 use EssentialMVC\Http\Response;
 use EssentialMVC\Exception\NotFoundException;
+use EssentialMVC\Support\Env\Env;
+use EssentialMVC\Support\Env\EnvLoaderByFile;
 
-class App
+class Kernel
 {
-    private static App $instance;
+    private string $basePath;
+    private Env $env;
+    private Request $request;
+    private Response $response;
+    private Router $router;
+    private Middleware $middleware;
 
-    public string $basePath;
-    public array $config;
-    public Request $request;
-    public Router $router;
+    public function __construct(
+        string $basePath,
+        Env $env,
+        // Request $request,
+        // Response $response,
+        // Router $router,
+        // Middleware $middleware
+    ) {
+        $this->basePath = $basePath;
+        $this->env = $env;
+        // $this->request = $request;
+        // $this->response = $response;
+        // $this->router = $router;
+        // $this->middleware = $middleware;
 
-    public Middleware $middleware;
-    public View $view;
-    public Response $response;
+        // $this->basePath = rtrim($basePath, '/');
 
-    public \PDO $pdo;
+        // date_default_timezone_set($env->get('APP_TIMEZONE', 'UTC'));
 
-    public function __construct(string $basePath)
-    {
-        $this->basePath = rtrim($basePath, '/');
-        $this->loadConfig();
 
-        $this->request = new Request($this);
-        $this->router = new Router($this);
-        $this->middleware = new Middleware($this);
-        $this->response = new Response($this);
+        // // // Timezone
+        // // date_default_timezone_set($env->get('APP_TIMEZONE', 'UTC'));
 
-        $this->loadRoutes();
-        dd($this->router->routes);
+        // $this->loadEnv();
+        // $this->loadConfig();
+
+        // $this->request = new Request($this);
+        // $this->router = new Router($this);
+        // $this->middleware = new Middleware($this);
+        // $this->response = new Response($this);
+
+        // $this->loadRoutes();
+        // dd($this->router->routes);
 
         // $this->view = new View($this);
 
         // $this->getPdoConnection();
         // static::$instance = $this;
     }
+
+    private function loadEnV(): void
+    {
+        $envLoader = new EnvLoaderByFile("{$this->basePath}/.env");
+        $envLoader->load();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static function getInstance(): App
     {
