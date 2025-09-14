@@ -2,22 +2,21 @@
 
 namespace EssentialMVC\Core;
 
-use EssentialMVC\Core\Config\Exception\ConfigException;
+use EssentialMVC\Core\Config\ConfigFileReader;
 use EssentialMVC\Core\Contract\ConfigLoader;
-use EssentialMVC\Core\Config\FileReader;
+use EssentialMVC\Core\Exception\ConfigException;
 
 class ConfigLoaderByFiles implements ConfigLoader
 {
   private string $configDir;
-  private FileReader $fileReader;
+  private ConfigFileReader $fileReader;
 
   /** 
    * @var array<string,array<string,string>>
    */
   private array $config = [];
 
-
-  public function __construct(string $configDir, FileReader $fileReader)
+  public function __construct(string $configDir, ConfigFileReader $fileReader)
   {
     $this->configDir = $configDir;
     $this->fileReader = $fileReader;
