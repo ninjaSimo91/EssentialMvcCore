@@ -3,9 +3,9 @@
 namespace EssentialMVC\Core\Bootstrap;
 
 use EssentialMVC\Support\Config\ConfigFileReader;
-use EssentialMVC\Core\Contract\ConfigLoader;
 use EssentialMVC\Core\Kernel;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
+use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 
 class KernelFactory
 {
