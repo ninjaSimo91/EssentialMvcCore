@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Exception;
+namespace EssentialMVC\Core\Exception;
 
 class NotFoundException extends \Exception
 {

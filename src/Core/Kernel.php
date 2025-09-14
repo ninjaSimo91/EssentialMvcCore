@@ -9,13 +9,10 @@ use EssentialMVC\Core\Router;
 use EssentialMVC\Http\Request;
 use EssentialMVC\Http\Response;
 use EssentialMVC\Exception\NotFoundException;
-use EssentialMVC\Support\Env\Env;
-use EssentialMVC\Support\Env\EnvLoaderByFile;
 
 class Kernel
 {
     private string $basePath;
-    private Env $env;
     private Request $request;
     private Response $response;
     private Router $router;
@@ -23,29 +20,18 @@ class Kernel
 
     public function __construct(
         string $basePath,
-        Env $env,
         // Request $request,
         // Response $response,
         // Router $router,
         // Middleware $middleware
     ) {
-        $this->basePath = $basePath;
-        $this->env = $env;
+        $this->basePath = rtrim($basePath, '/');
         // $this->request = $request;
         // $this->response = $response;
         // $this->router = $router;
         // $this->middleware = $middleware;
 
-        // $this->basePath = rtrim($basePath, '/');
-
-        // date_default_timezone_set($env->get('APP_TIMEZONE', 'UTC'));
-
-
-        // // // Timezone
-        // // date_default_timezone_set($env->get('APP_TIMEZONE', 'UTC'));
-
-        // $this->loadEnv();
-        // $this->loadConfig();
+        // $this->loadConfigFiles();
 
         // $this->request = new Request($this);
         // $this->router = new Router($this);
@@ -61,79 +47,9 @@ class Kernel
         // static::$instance = $this;
     }
 
-    private function loadEnV(): void
+    private function loadConfigFiles(): void
     {
-        $envLoader = new EnvLoaderByFile("{$this->basePath}/.env");
-        $envLoader->load();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static function getInstance(): App
-    {
-        return self::$instance;
-    }
-
-    private function loadConfig(): void
-    {
-        $dir = $this->basePath . '/config';
-        if (is_dir($dir)) {
-            $files = scandir($dir);
-            foreach ($files as $file) {
-                if ($file === '.' || $file === '..') continue;
-                $filename = pathinfo($file, PATHINFO_FILENAME);
-                $this->config[$filename] = include $dir . '/' . $file;
-            }
-        } else if (is_file($dir)) {
-            $filename = pathinfo($dir, PATHINFO_FILENAME);
-            $this->config[$filename] = include $dir;
-        }
+       
     }
 
     private function loadRoutes(): void

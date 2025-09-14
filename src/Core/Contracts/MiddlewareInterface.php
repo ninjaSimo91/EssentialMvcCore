@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Contracts;
+namespace EssentialMVC\Core\Contracts;
 
 use EssentialMVC\Core\App;
 
