@@ -7,6 +7,8 @@ use EssentialMVC\Core\Exception\ConfigException;
 class ConfigFileReader
 {
 
+    public function __construct() {}
+
     /**
      * @return array<string, string>
      */
