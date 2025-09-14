@@ -2,7 +2,7 @@
 
 namespace EssentialMVC\Core;
 
-use EssentialMVC\Core\Contract\ConfigLoader;
+use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 
 class Kernel
 {
