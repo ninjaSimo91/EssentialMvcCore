@@ -6,40 +6,35 @@ use EssentialMVC\Core\Exception\ConfigException;
 
 class ConfigFileReader
 {
-    private string $filePath;
 
-    public function __construct(string $filePath)
-    {
-        $this->filePath = $filePath;
-    }
     /**
      * @return array<string, string>
      */
-    public function read(): array
+    public function read(string $filePath): array
     {
-        $this->ensureFileExists();
-        $this->ensureFileIsReadable();
+        $this->ensureFileExists($filePath);
+        $this->ensureFileIsReadable($filePath);
 
-        return $this->ensureFileIsArrayAndLoad();
+        return $this->ensureFileIsArrayAndLoad($filePath);
     }
 
     /**
      * @throws ConfigException
      */
-    private function ensureFileExists(): void
+    private function ensureFileExists(string $filePath): void
     {
-        if (!is_file($this->filePath)) {
-            throw new ConfigException("Not is file: {$this->filePath}");
+        if (!is_file($filePath)) {
+            throw new ConfigException("Not is file: {$filePath}");
         }
     }
 
     /**
      * @throws ConfigException
      */
-    private function ensureFileIsReadable(): void
+    private function ensureFileIsReadable(string $filePath): void
     {
-        if (!is_readable($this->filePath)) {
-            throw new ConfigException("Cannot read config file: {$this->filePath}");
+        if (!is_readable($filePath)) {
+            throw new ConfigException("Cannot read config file: {$filePath}");
         }
     }
 
@@ -47,13 +42,13 @@ class ConfigFileReader
      * @return array<string,string>
      * @throws ConfigException
      */
-    private function ensureFileIsArrayAndLoad(): array
+    private function ensureFileIsArrayAndLoad(string $filePath): array
     {
         /** @var mixed $data */
-        $data = include $this->filePath;
+        $data = include $filePath;
 
         if (!is_array($data)) {
-            throw new ConfigException("Config file must return an array: {$this->filePath}");
+            throw new ConfigException("Config file must return an array: {$filePath}");
         }
 
         /** @var array<string,string> $data */

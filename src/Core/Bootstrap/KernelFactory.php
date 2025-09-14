@@ -27,7 +27,7 @@ class KernelFactory
   private static function createConfigLoader(string $basePath): ConfigLoader
   {
     $configPath = $basePath . DIRECTORY_SEPARATOR . "config";
-    $configFileReader = new ConfigFileReader($configPath);
+    $configFileReader = new ConfigFileReader();
 
     $config = new ConfigLoaderByFiles($configPath, $configFileReader);
     $config->load();

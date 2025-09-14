@@ -51,11 +51,6 @@ class ConfigLoaderByFiles implements ConfigLoader
       $filename = pathinfo($file, PATHINFO_FILENAME);
 
       $data = $this->fileReader->read($path);
-
-      if (!is_array($data)) {
-        throw new ConfigException("Config file must return an array: {$path}");
-      }
-
       $this->config[$filename] = $data;
     }
   }
