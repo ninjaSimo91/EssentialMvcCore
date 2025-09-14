@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Core\Contract;
+namespace EssentialMVC\Support\Config\Contracts;
 
 interface ConfigLoader
 {

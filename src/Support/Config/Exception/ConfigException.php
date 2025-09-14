@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Core\Exception;
+namespace EssentialMVC\Support\Config\Exception;
 
 class ConfigException extends \Exception
 {

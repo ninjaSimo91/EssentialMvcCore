@@ -2,7 +2,7 @@
 
 namespace EssentialMVC\Support\Config;
 
-use EssentialMVC\Core\Exception\ConfigException;
+use EssentialMVC\Support\Config\Exception\ConfigException;
 
 class ConfigFileReader
 {

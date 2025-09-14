@@ -3,8 +3,8 @@
 namespace EssentialMVC\Support\Config;
 
 use EssentialMVC\Support\Config\ConfigFileReader;
-use EssentialMVC\Core\Contract\ConfigLoader;
-use EssentialMVC\Core\Exception\ConfigException;
+use EssentialMVC\Support\Config\Contracts\ConfigLoader;
+use EssentialMVC\Support\Config\Exception\ConfigException;
 
 class ConfigLoaderByFiles implements ConfigLoader
 {
