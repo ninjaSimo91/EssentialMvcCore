@@ -2,10 +2,10 @@
 
 namespace EssentialMVC\Core\Bootstrap;
 
-use EssentialMVC\Core\Config\ConfigFileReader;
-use EssentialMVC\Core\ConfigLoaderByFiles;
+use EssentialMVC\Support\Config\ConfigFileReader;
 use EssentialMVC\Core\Contract\ConfigLoader;
 use EssentialMVC\Core\Kernel;
+use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 
 class KernelFactory
 {
@@ -24,6 +24,7 @@ class KernelFactory
       // $middleware
     );
   }
+  
   private static function createConfigLoader(string $basePath): ConfigLoader
   {
     $configPath = $basePath . DIRECTORY_SEPARATOR . "config";

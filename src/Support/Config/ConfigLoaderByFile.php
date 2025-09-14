@@ -1,8 +1,8 @@
 <?php
 
-namespace EssentialMVC\Core;
+namespace EssentialMVC\Support\Config;
 
-use EssentialMVC\Core\Config\ConfigFileReader;
+use EssentialMVC\Support\Config\ConfigFileReader;
 use EssentialMVC\Core\Contract\ConfigLoader;
 use EssentialMVC\Core\Exception\ConfigException;
 

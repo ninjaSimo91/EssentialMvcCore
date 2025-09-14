@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialMVC\Core\Config;
+namespace EssentialMVC\Support\Config;
 
 use EssentialMVC\Core\Exception\ConfigException;
 
