@@ -27,6 +27,31 @@
     "require-dev": {
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpstan/phpstan-deprecation-rules": "^2.0"
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "vimeo/psalm": "^6.13",
+        "squizlabs/php_codesniffer": "^3.13",
+        "friendsofphp/php-cs-fixer": "^3.87",
+        "phpunit/phpunit": "^12.3",
+        "infection/infection": "^0.31.2",
+        "qossmic/deptrac": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "vendor/bin/phpstan analyse",
+            "vendor/bin/psalm",
+            "vendor/bin/deptrac analyse"
+        ],
+        "lint": [
+            "vendor/bin/php-cs-fixer fix --dry-run",
+            "vendor/bin/phpcs --standard=PSR12 src"
+        ],
+        "format": "vendor/bin/php-cs-fixer fix",
+        "test": "vendor/bin/phpunit",
+        "mutation": "vendor/bin/infection"
     }
 }

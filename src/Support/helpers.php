@@ -1,12 +1,13 @@
 <?php
 
-use EssentialMVC\Core\App;
-use EssentialMVC\Support\Env;
+use EssentialMVC\Support\Env\Env;
 
-function env(string $key, string $default = ''): string
-{
-  return Env::get($key, $default);
-}
+// function env(string $key, string $default = ''): string
+// {
+//   //  new Env();
+  
+//   // return $env->get($key, $default);
+// }
 
 function preprint(mixed $value, bool $varDump = false): void
 {

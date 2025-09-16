@@ -4,11 +4,8 @@ includes:
 
 parameters:
     level: max
-
     paths:
         - src
-
     excludePaths:
         - %currentWorkingDirectory%/vendor
-
     treatPhpDocTypesAsCertain: true

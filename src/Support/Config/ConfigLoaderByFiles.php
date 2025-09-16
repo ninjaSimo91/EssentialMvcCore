@@ -60,9 +60,6 @@ class ConfigLoaderByFiles implements ConfigLoader
     return ($file === '.' || $file === '..');
   }
 
-
-  // private function getFiles(array $f)
-
   /** 
    * @return array<string,array<string,string>> 
    */

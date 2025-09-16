@@ -1,0 +1,10 @@
+<psalm>
+    <projectFiles>
+        <directory name="src" />
+    </projectFiles>
+    <issueHandlers>
+        <MissingReturnType errorLevel="error" />
+        <MissingParamType errorLevel="error" />
+        <MissingPropertyType errorLevel="error" />
+    </issueHandlers>
+</psalm>

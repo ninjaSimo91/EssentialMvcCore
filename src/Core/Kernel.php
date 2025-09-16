@@ -3,6 +3,7 @@
 namespace EssentialMVC\Core;
 
 use EssentialMVC\Support\Config\Contracts\ConfigLoader;
+use EssentialMVC\Support\Env\Env;
 
 class Kernel
 {
@@ -12,6 +13,8 @@ class Kernel
     // private Router $router;
     // private Middleware $middleware;
 
+    private Env $env;
+    
     /** 
      * @var array<string,array<string,string>>
      */
@@ -19,6 +22,7 @@ class Kernel
 
     public function __construct(
         // string $basePath,
+        Env $env,
         ConfigLoader $configLoader,
         // Request $request,
         // Response $response,
@@ -31,6 +35,7 @@ class Kernel
         // $this->router = $router;
         // $this->middleware = $middleware;
 
+        $this->env = $env;
         $this->config = $this->loadConfig($configLoader);
         dd($this->config);
 
@@ -46,6 +51,11 @@ class Kernel
 
         // $this->getPdoConnection();
         // static::$instance = $this;
+    }
+
+    public function env(): Env
+    {
+        return $this->env;
     }
 
     /** 
