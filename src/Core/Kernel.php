@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EssentialMVC\Core;
@@ -16,6 +17,7 @@ class Kernel
     // private Middleware $middleware;
 
     private Env $env;
+    private ConfigLoader $configLoader;
 
     /** 
      * @var array<string,array<string,string>>
@@ -38,8 +40,7 @@ class Kernel
         // $this->middleware = $middleware;
 
         $this->env = $env;
-        $this->config = $this->loadConfig($configLoader);
-        dd($this->config);
+        $this->configLoader = $configLoader;
 
         // $this->request = new Request($this);
         // $this->router = new Router($this);
@@ -53,6 +54,13 @@ class Kernel
 
         // $this->getPdoConnection();
         // static::$instance = $this;
+    }
+
+    public function run(): void
+    {
+        $this->configLoader->load();
+        $this->config = $this->loadConfig($this->configLoader);
+        dd($this->config);
     }
 
     public function env(): EnvFacade

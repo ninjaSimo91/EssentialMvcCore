@@ -12,18 +12,16 @@ class ConfigLoaderByFiles implements ConfigLoader
 {
     private string $configDir;
     private ConfigFileReader $fileReader;
-    private Env $env;
 
     /** 
      * @var array<string,array<string,string>>
      */
     private array $config = [];
 
-    public function __construct(string $configDir, ConfigFileReader $fileReader, Env $env)
+    public function __construct(string $configDir, ConfigFileReader $fileReader)
     {
         $this->configDir = $configDir;
         $this->fileReader = $fileReader;
-        $this->env = $env;
     }
 
     public function load(): void
@@ -55,7 +53,7 @@ class ConfigLoaderByFiles implements ConfigLoader
             $filename = pathinfo($file, PATHINFO_FILENAME);
 
             // Passiamo Env al fileReader
-            $data = $this->fileReader->read($path, $this->env);
+            $data = $this->fileReader->read($path);
             $this->config[$filename] = $data;
         }
     }
