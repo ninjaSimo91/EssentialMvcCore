@@ -25,8 +25,11 @@ class KernelFactory
 
     // Config Loader condiviso
     $container->setShared('config', function (ServiceContainer $c) use ($basePath): ConfigLoaderByFiles {
+      /** @var Env $env */
+      $env = $c->get('env');
       $configPath = $basePath . DIRECTORY_SEPARATOR . 'config';
-      $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader());
+      $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader(), $env->getFacade());
+      $loader->load();
       return $loader;
     });
 

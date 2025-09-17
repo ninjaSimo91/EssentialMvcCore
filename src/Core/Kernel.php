@@ -17,7 +17,6 @@ class Kernel
     // private Middleware $middleware;
 
     private Env $env;
-    private ConfigLoader $configLoader;
 
     /** 
      * @var array<string,array<string,string>>
@@ -40,7 +39,7 @@ class Kernel
         // $this->middleware = $middleware;
 
         $this->env = $env;
-        $this->configLoader = $configLoader;
+        $this->config = $this->loadConfig($configLoader);
 
         // $this->request = new Request($this);
         // $this->router = new Router($this);
@@ -48,7 +47,6 @@ class Kernel
         // $this->response = new Response($this);
 
         // $this->loadRoutes();
-        // dd($this->router->routes);
 
         // $this->view = new View($this);
 
@@ -58,8 +56,6 @@ class Kernel
 
     public function run(): void
     {
-        $this->configLoader->load();
-        $this->config = $this->loadConfig($this->configLoader);
         dd($this->config);
     }
 

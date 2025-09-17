@@ -1,27 +1,30 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EssentialMVC\Support\Config;
 
+use EssentialMVC\Facades\EnvFacade;
 use EssentialMVC\Support\Config\ConfigFileReader;
 use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 use EssentialMVC\Support\Config\Exception\ConfigException;
-use EssentialMVC\Support\Env\Env;
 
 class ConfigLoaderByFiles implements ConfigLoader
 {
     private string $configDir;
     private ConfigFileReader $fileReader;
+    private EnvFacade $env;
 
     /** 
      * @var array<string,array<string,string>>
      */
     private array $config = [];
 
-    public function __construct(string $configDir, ConfigFileReader $fileReader)
+    public function __construct(string $configDir, ConfigFileReader $fileReader, EnvFacade $env)
     {
         $this->configDir = $configDir;
         $this->fileReader = $fileReader;
+        $this->env = $env;
     }
 
     public function load(): void
@@ -52,8 +55,7 @@ class ConfigLoaderByFiles implements ConfigLoader
             $path = $this->configDir . DIRECTORY_SEPARATOR . $file;
             $filename = pathinfo($file, PATHINFO_FILENAME);
 
-            // Passiamo Env al fileReader
-            $data = $this->fileReader->read($path);
+            $data = $this->fileReader->read($path, $this->env);
             $this->config[$filename] = $data;
         }
     }
