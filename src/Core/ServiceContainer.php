@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Core;
 
@@ -24,7 +25,6 @@ class ServiceContainer
 
     public function get(string $name): mixed
     {
-
         if (!isset($this->definitions[$name])) {
             throw new ServiceNotFoundException("Service {$name} not found");
         }

@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Support\Env;
 
+use EssentialMVC\Facades\EnvFacade;
 use EssentialMVC\Support\Env\Contracts\EnvLoader;
 use EssentialMVC\Support\Env\Exception\EnvException;
 
@@ -34,4 +36,8 @@ class Env
 
     putenv("$key=$value");
   }
+
+  public function getFacade(): EnvFacade {
+        return new EnvFacade($this);
+    }
 }

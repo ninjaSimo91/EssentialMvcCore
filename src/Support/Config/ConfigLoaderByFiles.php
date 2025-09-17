@@ -1,70 +1,75 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Support\Config;
 
 use EssentialMVC\Support\Config\ConfigFileReader;
 use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 use EssentialMVC\Support\Config\Exception\ConfigException;
+use EssentialMVC\Support\Env\Env;
 
 class ConfigLoaderByFiles implements ConfigLoader
 {
-  private string $configDir;
-  private ConfigFileReader $fileReader;
+    private string $configDir;
+    private ConfigFileReader $fileReader;
+    private Env $env;
 
-  /** 
-   * @var array<string,array<string,string>>
-   */
-  private array $config = [];
+    /** 
+     * @var array<string,array<string,string>>
+     */
+    private array $config = [];
 
-  public function __construct(string $configDir, ConfigFileReader $fileReader)
-  {
-    $this->configDir = $configDir;
-    $this->fileReader = $fileReader;
-  }
-
-  public function load(): void
-  {
-    $this->checkExistConfigDir();
-    $this->scanConfigDirectory();
-  }
-
-  /**
-   * @throws ConfigException
-   */
-  private function checkExistConfigDir(): void
-  {
-    if (!is_dir($this->configDir)) {
-      throw new ConfigException("Config path does not exist: {$this->configDir}");
+    public function __construct(string $configDir, ConfigFileReader $fileReader, Env $env)
+    {
+        $this->configDir = $configDir;
+        $this->fileReader = $fileReader;
+        $this->env = $env;
     }
-  }
 
-  private function scanConfigDirectory(): void
-  {
-    $files = scandir($this->configDir);
-
-    foreach ($files as $file) {
-      if ($this->isNavigationDir($file)) {
-        continue;
-      }
-
-      $path = $this->configDir . DIRECTORY_SEPARATOR . $file;
-      $filename = pathinfo($file, PATHINFO_FILENAME);
-
-      $data = $this->fileReader->read($path);
-      $this->config[$filename] = $data;
+    public function load(): void
+    {
+        $this->checkExistConfigDir();
+        $this->scanConfigDirectory();
     }
-  }
 
-  private function isNavigationDir(string $file): bool
-  {
-    return ($file === '.' || $file === '..');
-  }
+    /**
+     * @throws ConfigException
+     */
+    private function checkExistConfigDir(): void
+    {
+        if (!is_dir($this->configDir)) {
+            throw new ConfigException("Config path does not exist: {$this->configDir}");
+        }
+    }
 
-  /** 
-   * @return array<string,array<string,string>> 
-   */
-  public function get(): array
-  {
-    return $this->config;
-  }
+    private function scanConfigDirectory(): void
+    {
+        $files = scandir($this->configDir);
+
+        foreach ($files as $file) {
+            if ($this->isNavigationDir($file)) {
+                continue;
+            }
+
+            $path = $this->configDir . DIRECTORY_SEPARATOR . $file;
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+
+            // Passiamo Env al fileReader
+            $data = $this->fileReader->read($path, $this->env);
+            $this->config[$filename] = $data;
+        }
+    }
+
+    private function isNavigationDir(string $file): bool
+    {
+        return ($file === '.' || $file === '..');
+    }
+
+    /** 
+     * @return array<string,array<string,string>> 
+     */
+    public function get(): array
+    {
+        return $this->config;
+    }
 }

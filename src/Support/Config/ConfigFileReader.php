@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Support\Config;
 
 use EssentialMVC\Support\Config\Exception\ConfigException;
+use EssentialMVC\Support\Env\Env;
 
 class ConfigFileReader
 {
@@ -12,12 +14,12 @@ class ConfigFileReader
     /**
      * @return array<string, string>
      */
-    public function read(string $filePath): array
+    public function read(string $filePath, Env $env): array
     {
         $this->ensureFileExists($filePath);
         $this->ensureFileIsReadable($filePath);
 
-        return $this->ensureFileIsArrayAndLoad($filePath);
+        return $this->ensureFileIsArrayAndLoad($filePath, $env);
     }
 
     /**
@@ -44,7 +46,7 @@ class ConfigFileReader
      * @return array<string,string>
      * @throws ConfigException
      */
-    private function ensureFileIsArrayAndLoad(string $filePath): array
+    private function ensureFileIsArrayAndLoad(string $filePath, Env $env): array
     {
         /** @var mixed $data */
         $data = include $filePath;

@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Core;
 
+use EssentialMVC\Facades\EnvFacade;
 use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 use EssentialMVC\Support\Env\Env;
 
@@ -14,7 +16,7 @@ class Kernel
     // private Middleware $middleware;
 
     private Env $env;
-    
+
     /** 
      * @var array<string,array<string,string>>
      */
@@ -53,9 +55,9 @@ class Kernel
         // static::$instance = $this;
     }
 
-    public function env(): Env
+    public function env(): EnvFacade
     {
-        return $this->env;
+        return $this->env->getFacade();
     }
 
     /** 

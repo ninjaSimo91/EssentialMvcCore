@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace EssentialMVC\Core\Bootstrap;
 
@@ -14,35 +15,31 @@ class KernelFactory
   public static function create(string $basePath): Kernel
   {
     $basePath = rtrim($basePath, '/');
-
     $container = new ServiceContainer();
 
     // Env condiviso
-    $container->setShared(
-      'env',
-      function () use ($basePath): Env {
-        $loader = new EnvLoaderByFile($basePath . DIRECTORY_SEPARATOR . '.env');
-        return new Env($loader);
-      }
-    );
+    $container->setShared('env', function () use ($basePath): Env {
+      $loader = new EnvLoaderByFile($basePath . DIRECTORY_SEPARATOR . '.env');
+      return new Env($loader);
+    });
 
     // Config Loader condiviso
-    $container->setShared(
-      'config',
-      function () use ($basePath): ConfigLoaderByFiles {
-        $configPath = $basePath . DIRECTORY_SEPARATOR . 'config';
-        $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader());
-        $loader->load();
-        return $loader;
-      }
-    );
+    $container->setShared('config', function (ServiceContainer $c) use ($basePath): ConfigLoaderByFiles {
+      /** @var Env $env */
+      $env = $c->get('env');
+      $configPath = $basePath . DIRECTORY_SEPARATOR . 'config';
+      $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader(), $env);
+      $loader->load();
+      return $loader;
+    });
 
     // Kernel transiente
     $container->setTransient('kernel', function (ServiceContainer $c): Kernel {
-      /** @var ConfigLoaderByFiles $config */
-      $config = $c->get('config');
       /** @var Env $env */
       $env = $c->get('env');
+
+      /** @var ConfigLoaderByFiles $config */
+      $config = $c->get('config');
 
       return new Kernel($env, $config);
     });
