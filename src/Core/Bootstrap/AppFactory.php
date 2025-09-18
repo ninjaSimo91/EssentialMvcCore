@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core\Bootstrap;
 
-use EssentialMVC\Core\Kernel;
 use EssentialMVC\Core\ServiceContainer;
+use EssentialMVC\Core\Providers\EnvProvider;
+use EssentialMVC\Core\Providers\KernelProvider;
 
 class AppFactory
 {
-  public static function create(ServiceContainer $container, string $basePath): Kernel
+  public static function create(ServiceContainer $container, string $basePath): ServiceContainer
   {
-    $basePath = rtrim($basePath, '/');
+    $providers = [
+      new EnvProvider($basePath),
+      new ConfigProvider($basePath),
+      new KernelProvider()
+    ];
 
-    EnvFactory::set($container, $basePath);
-    ConfigFactory::set($container, $basePath);
-    KernelFactory::set($container);
+    foreach ($providers as $provider) {
+      $provider->register($container);
+    }
 
-    /** @var Kernel $kernel */
-    $kernel = $container->get('kernel');
-    return $kernel;
+    return $container;
   }
 }

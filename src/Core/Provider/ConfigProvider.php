@@ -8,17 +8,28 @@ use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigFileReader;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 use EssentialMVC\Support\Env\Env;
+use EssentialMVC\Core\Contracts\ServiceProvider;
 
-class ConfigFactory
+class ConfigProvider implements ServiceProvider
 {
-  public static function set(ServiceContainer $container, string $basePath): void
+
+  private string $basePath;
+
+  public function __construct(string $basePath)
   {
-    $container->setShared('config', function (ServiceContainer $c) use ($basePath): ConfigLoaderByFiles {
+    $this->basePath = $basePath;
+  }
+
+  public function register(ServiceContainer $container): void
+  {
+    $container->setShared('config', function (ServiceContainer $c): ConfigLoaderByFiles {
       /** @var Env $env */
       $env = $c->get('env');
-      $configPath = $basePath . DIRECTORY_SEPARATOR . 'config';
+      $configPath = $this->basePath . DIRECTORY_SEPARATOR . 'config';
+
       $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader(), $env->getFacade());
       $loader->load();
+
       return $loader;
     });
   }

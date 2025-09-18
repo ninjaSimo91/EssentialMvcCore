@@ -2,16 +2,19 @@
 
 declare(strict_types=1);
 
-namespace EssentialMVC\Core\Bootstrap;
+namespace EssentialMVC\Core\Providers;
 
+use EssentialMVC\Core\Contracts\ServiceProvider;
 use EssentialMVC\Core\Kernel;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 use EssentialMVC\Support\Env\Env;
 
-class KernelFactory
+class KernelProvider implements ServiceProvider
 {
-  public static function set(ServiceContainer $container): void
+  public function __construct() {}
+
+  public function register(ServiceContainer $container): void
   {
     $container->setTransient('kernel', function (ServiceContainer $c): Kernel {
       /** @var Env $env */
