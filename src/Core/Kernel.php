@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core;
 
-use EssentialMVC\Facades\EnvFacade;
-use EssentialMVC\Support\Config\Contracts\ConfigLoader;
-use EssentialMVC\Support\Env\Env;
-
 class Kernel
 {
     // private string $basePath;
@@ -16,7 +12,7 @@ class Kernel
     // private Router $router;
     // private Middleware $middleware;
 
-    private Env $env;
+    // private Router $router;
 
     /** 
      * @var array<string,array<string,string>>
@@ -25,11 +21,10 @@ class Kernel
 
     public function __construct(
         // string $basePath,
-        Env $env,
-        ConfigLoader $configLoader,
+        array $config,
+        // Router $router,
         // Request $request,
         // Response $response,
-        // Router $router,
         // Middleware $middleware
     ) {
         // $this->basePath = rtrim($basePath, '/');
@@ -38,8 +33,7 @@ class Kernel
         // $this->router = $router;
         // $this->middleware = $middleware;
 
-        $this->env = $env;
-        $this->config = $this->loadConfig($configLoader);
+        $this->config = $config;
 
         // $this->request = new Request($this);
         // $this->router = new Router($this);
@@ -57,19 +51,6 @@ class Kernel
     public function run(): void
     {
         dd($this->config);
-    }
-
-    public function env(): EnvFacade
-    {
-        return $this->env->getFacade();
-    }
-
-    /** 
-     * @return array<string,array<string,string>> 
-     */
-    private function loadConfig(ConfigLoader $configLoader): array
-    {
-        return $configLoader->get();
     }
 
     // private function loadRoutes(): void

@@ -15,13 +15,15 @@ class App
   private string $basePath;
   private ServiceContainer $container;
 
-  public function __construct(string $basePath)
+  /** 
+   * @param array<string,mixed> $server 
+   */
+  public function __construct(string $basePath, array $server)
   {
     $this->basePath = $basePath;
     $this->container = new ServiceContainer();
-    AppFactory::create($this->container, $this->basePath);
+    AppFactory::create($this->container, $this->basePath, $server);
   }
-
 
   public function kernel(): Kernel
   {
@@ -49,6 +51,11 @@ class App
     $this->kernel()->run();
   }
 
+  /**
+   * @template T
+   * @param class-string<T> $id
+   * @return T
+   */
   public function get(string $id): mixed
   {
     return $this->container->get($id);

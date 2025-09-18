@@ -8,7 +8,6 @@ use EssentialMVC\Core\Contracts\ServiceProvider;
 use EssentialMVC\Core\Kernel;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
-use EssentialMVC\Support\Env\Env;
 
 class KernelProvider implements ServiceProvider
 {
@@ -17,13 +16,16 @@ class KernelProvider implements ServiceProvider
   public function register(ServiceContainer $container): void
   {
     $container->setTransient('kernel', function (ServiceContainer $c): Kernel {
-      /** @var Env $env */
-      $env = $c->get('env');
+      /** @var ConfigLoaderByFiles $configLoader */
+      $configLoader = $c->get('config');
+      /** @var array <string,array<string,string>> $config */
+      $config = $configLoader->get();
 
-      /** @var ConfigLoaderByFiles $config */
-      $config = $c->get('config');
 
-      return new Kernel($env, $config);
+      /** @var array <string,array<string,string>> $config */
+      $request = $c->get('request');
+
+      return new Kernel($config);
     });
   }
 }

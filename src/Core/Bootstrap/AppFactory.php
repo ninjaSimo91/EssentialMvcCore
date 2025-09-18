@@ -8,14 +8,19 @@ use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Core\Providers\EnvProvider;
 use EssentialMVC\Core\Providers\ConfigProvider;
 use EssentialMVC\Core\Providers\KernelProvider;
+use EssentialMVC\Core\Providers\RequestProvider;
 
 class AppFactory
 {
-  public static function create(ServiceContainer $container, string $basePath): ServiceContainer
+  /**
+   * @param array<string,mixed> $server
+   */
+  public static function create(ServiceContainer $container, string $basePath, array $server): ServiceContainer
   {
     $providers = [
       new EnvProvider($basePath),
       new ConfigProvider($basePath),
+      new RequestProvider($server),
       new KernelProvider()
     ];
 
