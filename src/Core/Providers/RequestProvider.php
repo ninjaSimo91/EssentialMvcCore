@@ -20,13 +20,13 @@ class RequestProvider implements ServiceProvider
    */
   public function __construct(array $server)
   {
-    $this->$server = $server;
+    $this->server = $server;
   }
 
   public function register(ServiceContainer $container): void
   {
     $container->setShared('request', function () {
-      $request = new RequestByHttpUrl($this->server);
+      return new RequestByHttpUrl($this->server);
     });
   }
 }
