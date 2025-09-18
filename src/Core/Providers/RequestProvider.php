@@ -6,7 +6,7 @@ namespace EssentialMVC\Core\Providers;
 
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Core\Contracts\ServiceProvider;
-use EssentialMVC\Http\Request\RequestByHttpUrl;
+use EssentialMVC\Core\Http\Request\RequestByHttpUrl;
 
 class RequestProvider implements ServiceProvider
 {
@@ -26,6 +26,7 @@ class RequestProvider implements ServiceProvider
   public function register(ServiceContainer $container): void
   {
     $container->setShared('request', function () {
+
       $request = new RequestByHttpUrl($this->server);
       return $request;
     });

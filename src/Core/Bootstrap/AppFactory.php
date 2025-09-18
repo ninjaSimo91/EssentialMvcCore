@@ -9,6 +9,7 @@ use EssentialMVC\Core\Providers\EnvProvider;
 use EssentialMVC\Core\Providers\ConfigProvider;
 use EssentialMVC\Core\Providers\KernelProvider;
 use EssentialMVC\Core\Providers\RequestProvider;
+use EssentialMVC\Core\Providers\RouterProvider;
 
 class AppFactory
 {
@@ -21,6 +22,7 @@ class AppFactory
       new EnvProvider($basePath),
       new ConfigProvider($basePath),
       new RequestProvider($server),
+      new RouterProvider(),
       new KernelProvider()
     ];
 

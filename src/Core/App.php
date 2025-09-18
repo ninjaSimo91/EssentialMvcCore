@@ -8,7 +8,6 @@ use EssentialMVC\Core\Bootstrap\AppFactory;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Core\Kernel;
 use EssentialMVC\Support\Env\Env;
-use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 
 class App
 {

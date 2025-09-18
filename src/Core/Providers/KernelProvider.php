@@ -25,6 +25,8 @@ class KernelProvider implements ServiceProvider
       /** @var array <string,array<string,string>> $config */
       $request = $c->get('request');
 
+      dd($request);
+
       return new Kernel($config);
     });
   }

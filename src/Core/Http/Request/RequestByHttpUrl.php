@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EssentialMVC\Http\Request;
+namespace EssentialMVC\Core\Http\Request;
 
 use EssentialMVC\Core\Contracts\Request;
 
@@ -19,16 +19,19 @@ class RequestByHttpUrl implements Request
     public function __construct(array $server)
     {
         $this->server = $server;
-        dd('asd');
     }
 
     public function uri(): string
     {
-        return $this->server['REQUEST_URI'] ?? '/';
+        /** @var string $uri */
+        $uri = $this->server['REQUEST_URI'] ?? '/';
+        return $uri;
     }
 
     public function method(): string
     {
-        return $this->server['REQUEST_METHOD'] ?? 'GET';
+        /** @var string $method */
+        $method = $this->server['REQUEST_METHOD'] ?? 'GET';
+        return strtoupper($method);
     }
 }

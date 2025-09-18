@@ -19,6 +19,9 @@ class Kernel
      */
     private array $config;
 
+    /** 
+     * @param array<string,array<string,string>>
+     */
     public function __construct(
         // string $basePath,
         array $config,
