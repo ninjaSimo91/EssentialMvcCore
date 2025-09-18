@@ -26,7 +26,8 @@ class RequestProvider implements ServiceProvider
   public function register(ServiceContainer $container): void
   {
     $container->setShared('request', function () {
-      return new RequestByHttpUrl($this->server);
+      $request = new RequestByHttpUrl($this->server);
+      return $request;
     });
   }
 }

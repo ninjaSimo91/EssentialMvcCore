@@ -16,7 +16,6 @@ class EnvProvider implements ServiceProvider
     public function __construct(string $basePath)
     {
         $this->basePath = $basePath;
-    dd('ciao2');
     }
 
     public function register(ServiceContainer $container): void

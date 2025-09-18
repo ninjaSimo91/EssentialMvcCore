@@ -15,9 +15,8 @@ class AppFactory
   /**
    * @param array<string,mixed> $server
    */
-  public static function create(ServiceContainer $container, string $basePath, array $server): ServiceContainer
+  public static function create(ServiceContainer $container, string $basePath, array $server): void
   {
-    dd('ciao');
     $providers = [
       new EnvProvider($basePath),
       new ConfigProvider($basePath),
@@ -28,7 +27,5 @@ class AppFactory
     foreach ($providers as $provider) {
       $provider->register($container);
     }
-
-    return $container;
   }
 }

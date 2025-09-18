@@ -19,7 +19,7 @@ class RequestByHttpUrl implements Request
     public function __construct(array $server)
     {
         $this->server = $server;
-        dd($this->server);
+        dd('asd');
     }
 
     public function uri(): string

@@ -39,13 +39,6 @@ class App
     return $env;
   }
 
-  public function config(): ConfigLoaderByFiles
-  {
-    /** @var ConfigLoaderByFiles $config */
-    $config = $this->container->get('config');
-    return $config;
-  }
-
   public function run(): void
   {
     $this->kernel()->run();
