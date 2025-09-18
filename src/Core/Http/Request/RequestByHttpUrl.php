@@ -25,7 +25,10 @@ class RequestByHttpUrl implements Request
     {
         /** @var string $uri */
         $uri = $this->server['REQUEST_URI'] ?? '/';
-        return $uri;
+        /** @var string $parsed */
+        $parsed = parse_url($uri, PHP_URL_PATH) ?? '/';
+
+        return $parsed;
     }
 
     public function method(): string

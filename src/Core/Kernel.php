@@ -12,7 +12,7 @@ class Kernel
     // private Router $router;
     // private Middleware $middleware;
 
-    // private Router $router;
+    private Router $router;
 
     /** 
      * @var array<string,array<string,string>>
@@ -25,7 +25,7 @@ class Kernel
     public function __construct(
         // string $basePath,
         array $config,
-        // Router $router,
+        Router $router,
         // Request $request,
         // Response $response,
         // Middleware $middleware
@@ -37,9 +37,9 @@ class Kernel
         // $this->middleware = $middleware;
 
         $this->config = $config;
+        $this->router = $router;
 
         // $this->request = new Request($this);
-        // $this->router = new Router($this);
         // $this->middleware = new Middleware($this);
         // $this->response = new Response($this);
 
@@ -53,7 +53,7 @@ class Kernel
 
     public function run(): void
     {
-        dd($this->config);
+        // dd($this->config);
     }
 
     // private function loadRoutes(): void

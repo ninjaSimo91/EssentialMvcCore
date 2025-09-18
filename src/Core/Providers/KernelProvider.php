@@ -6,6 +6,7 @@ namespace EssentialMVC\Core\Providers;
 
 use EssentialMVC\Core\Contracts\ServiceProvider;
 use EssentialMVC\Core\Kernel;
+use EssentialMVC\Core\Router;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 
@@ -21,13 +22,10 @@ class KernelProvider implements ServiceProvider
       /** @var array <string,array<string,string>> $config */
       $config = $configLoader->get();
 
+      /** @var Router $router */
+      $router = $c->get('router');
 
-      /** @var array <string,array<string,string>> $config */
-      $request = $c->get('request');
-
-      dd($request);
-
-      return new Kernel($config);
+      return new Kernel($config, $router);
     });
   }
 }

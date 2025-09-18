@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core\Providers;
 
-use EssentialMVC\Core\Router;
 use EssentialMVC\Core\Contracts\ServiceProvider;
 use EssentialMVC\Core\Http\Request\RequestByHttpUrl;
+use EssentialMVC\Core\Router;
 use EssentialMVC\Core\ServiceContainer;
 
 class RouterProvider implements ServiceProvider
@@ -19,7 +19,6 @@ class RouterProvider implements ServiceProvider
 
       /** @var RequestByHttpUrl $request */
       $request = $c->get('request');
-
       $router = new Router($request);
 
       return $router;
