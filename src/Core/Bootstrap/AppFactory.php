@@ -6,6 +6,7 @@ namespace EssentialMVC\Core\Bootstrap;
 
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Core\Providers\EnvProvider;
+use EssentialMVC\Core\Providers\ConfigProvider;
 use EssentialMVC\Core\Providers\KernelProvider;
 
 class AppFactory

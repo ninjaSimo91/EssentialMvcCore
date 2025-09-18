@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EssentialMVC\Core\Bootstrap;
+namespace EssentialMVC\Core\Providers;
 
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigFileReader;
