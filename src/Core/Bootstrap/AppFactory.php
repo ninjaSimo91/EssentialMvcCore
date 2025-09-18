@@ -17,6 +17,7 @@ class AppFactory
    */
   public static function create(ServiceContainer $container, string $basePath, array $server): ServiceContainer
   {
+    dd('ciao');
     $providers = [
       new EnvProvider($basePath),
       new ConfigProvider($basePath),
