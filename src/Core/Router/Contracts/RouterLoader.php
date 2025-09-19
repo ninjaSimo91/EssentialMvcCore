@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core\Router\Contracts;
 
-interface LoadRoutes
+interface RouterLoader
 {
     public function load(): void;
 }

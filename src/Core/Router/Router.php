@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EssentialMVC\Core;
+namespace EssentialMVC\Core\Router;
 
 use EssentialMVC\Core\Contracts\Request;
 use EssentialMVC\Core\Exception\NotFoundException;

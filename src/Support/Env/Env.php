@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace EssentialMVC\Support\Env;
 
 use EssentialMVC\Facades\EnvFacade;
-use EssentialMVC\Support\Env\Contracts\EnvLoader;
+use EssentialMVC\Support\Contracts\Loader;
 use EssentialMVC\Support\Env\Exception\EnvException;
 
 class Env
 {
-  private EnvLoader $loader;
+  private Loader $loader;
 
-  public function __construct(EnvLoader $loader)
+  public function __construct(Loader $loader)
   {
     $this->loader = $loader;
     $this->loader->load();

@@ -12,7 +12,6 @@ use EssentialMVC\Core\Contracts\ServiceProvider;
 
 class ConfigProvider implements ServiceProvider
 {
-
   private string $basePath;
 
   public function __construct(string $basePath)
@@ -25,12 +24,14 @@ class ConfigProvider implements ServiceProvider
     $container->setShared('config', function (ServiceContainer $c): ConfigLoaderByFiles {
       /** @var Env $env */
       $env = $c->get('env');
+
+      /** @var non-falsy-string $configPath */
       $configPath = $this->basePath . DIRECTORY_SEPARATOR . 'config';
 
-      $loader = new ConfigLoaderByFiles($configPath, new ConfigFileReader(), $env->getFacade());
-      $loader->load();
+      $configLoader = new ConfigLoaderByFiles($configPath, new ConfigFileReader($env->getFacade()));
+      $configLoader->load();
 
-      return $loader;
+      return $configLoader;
     });
   }
 }

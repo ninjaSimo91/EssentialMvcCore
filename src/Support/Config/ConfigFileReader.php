@@ -4,21 +4,26 @@ namespace EssentialMVC\Support\Config;
 
 use EssentialMVC\Facades\EnvFacade;
 use EssentialMVC\Support\Config\Exception\ConfigException;
+use EssentialMVC\Core\Contracts\FileReader;
 
-class ConfigFileReader
+class ConfigFileReader implements FileReader
 {
+    private EnvFacade $env;
 
-    public function __construct() {}
+    public function __construct(EnvFacade $env)
+    {
+        $this->env = $env;
+    }
 
     /**
      * @return array<string, string>
      */
-    public function read(string $filePath, EnvFacade $env): array
+    public function read(string $filePath): array
     {
         $this->ensureFileExists($filePath);
         $this->ensureFileIsReadable($filePath);
 
-        return $this->ensureFileIsArrayAndLoad($filePath, $env);
+        return $this->ensureFileIsArrayAndLoad($filePath);
     }
 
     /**
@@ -44,12 +49,12 @@ class ConfigFileReader
     /**
      * @return array<string,string>
      */
-    private function ensureFileIsArrayAndLoad(string $filePath, EnvFacade $env): array
+    private function ensureFileIsArrayAndLoad(string $filePath): array
     {
         /** @var callable $data */
         $data = include $filePath;
 
-        $result = $data($env);
+        $result = $data($this->env);
 
         if (!is_array($result)) {
             throw new ConfigException("Config callable must return an array: {$filePath}");

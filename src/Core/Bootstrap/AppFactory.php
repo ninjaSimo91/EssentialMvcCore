@@ -22,7 +22,7 @@ class AppFactory
       new EnvProvider($basePath),
       new ConfigProvider($basePath),
       new RequestProvider($server),
-      new RouterProvider(),
+      new RouterProvider($basePath),
       new KernelProvider()
     ];
 

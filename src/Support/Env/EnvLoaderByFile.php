@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Support\Env;
 
-use EssentialMVC\Support\Env\Contracts\EnvLoader;
+use EssentialMVC\Support\Contracts\Loader;
 use EssentialMVC\Support\Env\Exception\EnvException;
 
-class EnvLoaderByFile implements EnvLoader
+class EnvLoaderByFile implements Loader
 {
     private string $filePath;
 
