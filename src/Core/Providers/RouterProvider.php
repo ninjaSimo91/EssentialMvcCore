@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace EssentialMVC\Core\Providers;
 
 use EssentialMVC\Core\Contracts\ServiceProvider;
-use EssentialMVC\Core\Http\Request\RequestByHttpUrl;
 use EssentialMVC\Core\Router\Router;
-use EssentialMVC\Core\RouterLoaderByFiles;
+use EssentialMVC\Core\Router\RouterFileReader;
+use EssentialMVC\Core\Router\RouterLoaderByFiles;
 use EssentialMVC\Core\ServiceContainer;
+use EssentialMVC\Support\Config\ConfigLoaderByFiles;
+use EssentialMVC\Support\Router\Exception\RouteException;
 
 class RouterProvider implements ServiceProvider
 {
@@ -21,22 +23,37 @@ class RouterProvider implements ServiceProvider
 
   public function register(ServiceContainer $container): void
   {
-    $container->setShared('router', function (ServiceContainer $c): Router {
+    $container->setShared('router', function (ServiceContainer $c): RouterLoaderByFiles {
 
-      /** @var string $routerPath */
-      $routerPath = $this->basePath . DIRECTORY_SEPARATOR . 'routes';
+      /** @var ConfigLoaderByFiles $configLoader */
+      $configLoader = $c->get('config');
+      /** @var array <string,array<string,string>> $config */
+      $config = $configLoader->get();
 
-      $routerLoader = new RouterLoaderByFiles($routerPath, new RouterFileReader());
+      $this->ensureConfigRoutes($config);
+      /** @var array <string,string> $gateRoutes */
+      $gateRoutes = $config['routes'];
+
+      $routerLoader = new RouterLoaderByFiles($gateRoutes, new RouterFileReader());
       $routerLoader->load();
 
 
 
-      /** @var RequestByHttpUrl $request */
       // $request = $c->get('request');
-      // $request = $c->get('request');
-      $router = new Router($request);
+      // $router = new Router($request);
 
-      return $router;
+      return $routerLoader;
     });
+  }
+
+  /** 
+   * @param array <string,array<string,string>> $config 
+   * @throws RouteException
+   */
+  private function ensureConfigRoutes($config): void
+  {
+    if (!isset($config['routes'])) {
+      throw new RouteException("Route config does not exist");
+    }
   }
 }

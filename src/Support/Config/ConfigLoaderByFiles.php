@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Support\Config;
 
-use EssentialMVC\Facades\EnvFacade;
 use EssentialMVC\Support\Config\ConfigFileReader;
-use EssentialMVC\Support\Config\Contracts\ConfigLoader;
 use EssentialMVC\Support\Config\Exception\ConfigException;
+use EssentialMVC\Support\Contracts\Loader;
 
-class ConfigLoaderByFiles implements ConfigLoader
+class ConfigLoaderByFiles implements Loader
 {
     private string $configDir;
     private ConfigFileReader $fileReader;
-    private EnvFacade $env;
 
     /** 
      * @var array<string,array<string,string>> $config
@@ -28,14 +26,14 @@ class ConfigLoaderByFiles implements ConfigLoader
 
     public function load(): void
     {
-        $this->checkExistConfigDir();
+        $this->checkExistDir();
         $this->scanConfigDirectory();
     }
 
     /**
      * @throws ConfigException
      */
-    private function checkExistConfigDir(): void
+    private function checkExistDir(): void
     {
         if (!is_dir($this->configDir)) {
             throw new ConfigException("Config path does not exist: {$this->configDir}");

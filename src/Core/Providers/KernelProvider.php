@@ -6,7 +6,7 @@ namespace EssentialMVC\Core\Providers;
 
 use EssentialMVC\Core\Contracts\ServiceProvider;
 use EssentialMVC\Core\Kernel;
-use EssentialMVC\Core\Router;
+use EssentialMVC\Core\Router\Router;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
 

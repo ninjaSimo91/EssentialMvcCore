@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core;
 
+use EssentialMVC\Core\Router\Router;
+
 class Kernel
 {
     // private string $basePath;
@@ -25,7 +27,7 @@ class Kernel
     public function __construct(
         // string $basePath,
         array $config,
-        Router $router,
+        // Router $router,
         // Request $request,
         // Response $response,
         // Middleware $middleware
@@ -37,7 +39,7 @@ class Kernel
         // $this->middleware = $middleware;
 
         $this->config = $config;
-        $this->router = $router;
+        // $this->router = $router;
 
         // $this->request = new Request($this);
         // $this->middleware = new Middleware($this);
