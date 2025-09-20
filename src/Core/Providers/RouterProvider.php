@@ -10,7 +10,7 @@ use EssentialMVC\Core\Router\RouterFileReader;
 use EssentialMVC\Core\Router\RouterLoaderByFiles;
 use EssentialMVC\Core\ServiceContainer;
 use EssentialMVC\Support\Config\ConfigLoaderByFiles;
-use EssentialMVC\Support\Router\Exception\RouteException;
+use EssentialMVC\Core\Router\Exception\RouteException;
 
 class RouterProvider implements ServiceProvider
 {
@@ -25,6 +25,9 @@ class RouterProvider implements ServiceProvider
   {
     $container->setShared('router', function (ServiceContainer $c): RouterLoaderByFiles {
 
+      /** @var Router $router */
+       $router = new Router();
+
       /** @var ConfigLoaderByFiles $configLoader */
       $configLoader = $c->get('config');
       /** @var array <string,array<string,string>> $config */
@@ -34,7 +37,7 @@ class RouterProvider implements ServiceProvider
       /** @var array <string,string> $gateRoutes */
       $gateRoutes = $config['routes'];
 
-      $routerLoader = new RouterLoaderByFiles($gateRoutes, new RouterFileReader());
+      $routerLoader = new RouterLoaderByFiles($this->basePath, $gateRoutes, new RouterFileReader($router->getFacade()));
       $routerLoader->load();
 
 

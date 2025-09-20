@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EssentialMVC\Support\Env;
@@ -37,7 +38,8 @@ class Env
     putenv("$key=$value");
   }
 
-  public function getFacade(): EnvFacade {
-        return new EnvFacade($this);
-    }
+  public function getFacade(): EnvFacade
+  {
+    return new EnvFacade($this);
+  }
 }

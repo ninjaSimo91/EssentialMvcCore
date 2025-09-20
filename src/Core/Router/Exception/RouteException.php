@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EssentialMVC\Support\Router\Exception;
+namespace EssentialMVC\Core\Router\Exception;
 
 class RouteException extends \Exception
 {

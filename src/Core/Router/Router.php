@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace EssentialMVC\Core\Router;
 
-use EssentialMVC\Core\Contracts\Request;
-use EssentialMVC\Core\Exception\NotFoundException;
+use EssentialMVC\Facades\RouterFacade;
 
 class Router
 {
-    private Request $request;
+    // private Request $request;
 
     /**
      * @var array<string, array<string, callable|array>> $routes
      */
-    private array $routes;
+    // private array $routes;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->request = $request;
-        dd($this->request->uri());
+        // $this->request = $request;
+        // dd($this->request->uri());
     }
 
     // public function add(string $method, string $path, callable|array $handler): void
@@ -40,11 +39,11 @@ class Router
 
     public function resolve(): void
     {
-        /** @var string $method */
-        $method = $this->request->method();
+        // /** @var string $method */
+        // $method = $this->request->method();
 
-        /** @var string $uri */
-        $uri = $this->request->uri();
+        // /** @var string $uri */
+        // $uri = $this->request->uri();
 
         // /** @var callable|array $handler */
         // $handler = $this->routes[$method][$uri];
@@ -103,4 +102,9 @@ class Router
     //     }
     //     return [];
     // }
+
+    public function getFacade(): RouterFacade
+    {
+        return new RouterFacade($this);
+    }
 }
